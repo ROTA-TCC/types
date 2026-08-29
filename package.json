@@ -1,0 +1,20 @@
+{
+  "name": "@ROTA-TCC/types",
+  "version": "1.0.0",
+  "description": "Tipos e DTOs compartilhados do ROTA",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "publishConfig": {
+    "@ROTA-TCC:registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
+
