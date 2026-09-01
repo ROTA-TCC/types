@@ -10,11 +10,12 @@
   "scripts": {
     "build": "tsc"
   },
-  "publishConfig": {
-    "@ROTA-TCC:registry": "https://npm.pkg.github.com"
+  "dependencies": {
+    "class-validator": "^0.15.1",
+    "class-transformer": "^0.5.1",
+    "@nestjs/swagger": "^11.3.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.7.3"
   }
 }
-
