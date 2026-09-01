@@ -1,5 +1,5 @@
 import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
-import { Plan, TransactionType } from '@prisma/client';
+import { Plan, TransactionType } from '../enums';
 
 export class CreateCheckoutDto {
   @IsEnum(TransactionType)
