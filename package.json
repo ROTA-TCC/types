@@ -1,6 +1,6 @@
 {
   "name": "@ROTA-TCC/types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tipos e DTOs compartilhados do ROTA",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,6 +9,9 @@
   ],
   "scripts": {
     "build": "tsc"
+  },
+  "publishConfig": {
+    "@ROTA-TCC:registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "@nestjs/swagger": "^11.3.0",
