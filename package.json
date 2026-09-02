@@ -1,6 +1,6 @@
 {
   "name": "@ROTA-TCC/types",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Tipos e DTOs compartilhados do ROTA",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
