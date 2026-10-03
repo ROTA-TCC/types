@@ -1,21 +1,11 @@
-import { ApiProperty } from '@nestjs/swagger';
-
-export class AuthUserResponse {
-  @ApiProperty()
+export interface AuthUserResponse {
   id: string;
-
-  @ApiProperty()
   email: string;
-
-  @ApiProperty()
   alias: string;
 }
 
-export class AuthResponse {
-  @ApiProperty()
+export interface AuthResponse {
   accessToken: string;
-
-  @ApiProperty({ type: AuthUserResponse })
   user: AuthUserResponse;
 }
 
@@ -31,21 +21,13 @@ export interface AuthVerify2faResponse extends AuthResponse {
   message: string;
 }
 
-export class TwoFactorRequiredResponse {
-  @ApiProperty({ example: true })
+export interface TwoFactorRequiredResponse {
   requires2fa: true;
-
-  @ApiProperty()
   partialToken: string;
 }
 
-export class SecurityStatusResponse {
-  @ApiProperty()
+export interface SecurityStatusResponse {
   isVerified: boolean;
-
-  @ApiProperty()
   is2faEnabled: boolean;
-
-  @ApiProperty()
   plan: string;
 }

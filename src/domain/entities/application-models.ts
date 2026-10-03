@@ -1,6 +1,4 @@
-export type Plan = 'GRATIS' | 'PRO';
-
-export type TransactionType = 'PLAN_SUBSCRIPTION';
+import { Plan, TransactionType } from '../shared.types';
 
 export type TransactionStatus =
   | 'PENDING'
@@ -18,17 +16,6 @@ export interface User {
   isVerified: boolean;
   is2faEnabled: boolean;
   createdAt: Date;
-}
-
-export interface Profile {
-  id: string;
-  userId: string;
-  peso?: number | null;
-  altura?: number | null;
-  idade?: number | null;
-  nivelDificuldade?: string | null;
-  hideoutRadius?: number | null;
-  updatedAt: Date;
 }
 
 export interface Session {

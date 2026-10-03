@@ -2,24 +2,64 @@
   "name": "@ROTA-TCC/types",
   "version": "1.0.4",
   "description": "Tipos e DTOs compartilhados do ROTA",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./auth": {
+      "types": "./dist/auth/index.d.ts",
+      "import": "./dist/auth/index.mjs",
+      "require": "./dist/auth/index.js"
+    },
+    "./domain": {
+      "types": "./dist/domain/index.d.ts",
+      "import": "./dist/domain/index.mjs",
+      "require": "./dist/domain/index.js"
+    },
+    "./mail": {
+      "types": "./dist/mail/index.d.ts",
+      "import": "./dist/mail/index.mjs",
+      "require": "./dist/mail/index.js"
+    },
+    "./payment": {
+      "types": "./dist/payment/index.d.ts",
+      "import": "./dist/payment/index.mjs",
+      "require": "./dist/payment/index.js"
+    },
+    "./profile": {
+      "types": "./dist/profile/index.d.ts",
+      "import": "./dist/profile/index.mjs",
+      "require": "./dist/profile/index.js"
+    },
+    "./runs": {
+      "types": "./dist/runs/index.d.ts",
+      "import": "./dist/runs/index.mjs",
+      "require": "./dist/runs/index.js"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js"
+    }
+  },
   "scripts": {
     "build": "tsc"
   },
   "publishConfig": {
     "@ROTA-TCC:registry": "https://npm.pkg.github.com"
   },
-  "dependencies": {
-    "@nestjs/swagger": "^11.3.0",
-    "@prisma/client": "^7.10.0",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.15.1"
-  },
   "devDependencies": {
-    "typescript": "^5.7.3"
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
   }
 }

@@ -1,27 +1,15 @@
-import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import { z } from 'zod';
 import { Plan, TransactionType } from '../enums';
 
-export class CreateCheckoutDto {
-  @IsEnum(TransactionType)
-  type: TransactionType;
+export const CreateCheckoutSchema = z.object({
+  type: z.nativeEnum(TransactionType).refine((val) => val !== undefined, {
+    message: 'Tipo de transação inválido',
+  }),
+  plan: z.nativeEnum(Plan).optional(),
+  returnUrl: z.string().url().optional(),
+  completionUrl: z.string().url().optional(),
+  taxId: z.string().optional(),
+  customerName: z.string().optional(),
+});
 
-  @IsOptional()
-  @IsEnum(Plan)
-  plan?: Plan;
-
-  @IsString()
-  @IsOptional()
-  returnUrl?: string;
-
-  @IsString()
-  @IsOptional()
-  completionUrl?: string;
-
-  @IsString()
-  @IsOptional()
-  taxId?: string; // CPF/CNPJ
-
-  @IsString()
-  @IsOptional()
-  customerName?: string;
-}
+export type CreateCheckoutDto = z.infer<typeof CreateCheckoutSchema>;

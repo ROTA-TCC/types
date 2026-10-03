@@ -1,6 +1,6 @@
 import { HideoutZoneDto } from '../dtos/update-profile.dto';
 
-export interface Profile {
+export interface UserProfile {
   id: string;
   userId: string;
   peso?: number | null;

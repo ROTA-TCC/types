@@ -1,107 +1,37 @@
-import {
-  IsEmail,
-  IsString,
-  MinLength,
-  MaxLength,
-  IsBoolean,
-  IsOptional,
-  Matches,
-} from 'class-validator';
-import { Transform } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
+import { z } from 'zod';
 
-export class RegisterDto {
-  @ApiProperty({
-    example: 'johndoe',
-    minLength: 3,
-    maxLength: 30,
-    description:
-      'Nome de usuário único. Deve conter apenas letras, números e hifens.',
-  })
-  @IsString()
-  @MinLength(3)
-  @MaxLength(30)
-  @Matches(/^[a-zA-Z0-9-]+$/, {
-    message: 'Alias can only contain letters, numbers and hyphens',
-  })
-  alias: string;
+export const RegisterSchema = z.object({
+  alias: z.string().min(3, 'Mínimo 3 caracteres').max(30, 'Máximo 30 caracteres'),
+  email: z.string().email('Formato de e-mail inválido'),
+  password: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
+});
 
-  @ApiProperty({
-    example: 'user@example.com',
-    description: 'E-mail principal do usuário para login e notificações.',
-  })
-  @IsEmail()
-  @Transform(({ value }: { value: string }) => value?.toLowerCase().trim())
-  email: string;
+export type RegisterDto = z.infer<typeof RegisterSchema>;
 
-  @ApiProperty({
-    example: 'P@ssw0rd123',
-    minLength: 6,
-    maxLength: 72,
-    description: 'Senha segura. Mínimo de 6 caracteres.',
-  })
-  @IsString()
-  @MinLength(6)
-  @MaxLength(72)
-  password: string;
-}
+export const LoginSchema = z.object({
+  email: z.string().email('Formato de e-mail inválido'),
+  password: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
+  rememberMe: z.boolean().optional(),
+});
 
-export class LoginDto {
-  @ApiProperty({ example: 'user@example.com' })
-  @IsEmail()
-  @Transform(({ value }: { value: string }) => value?.toLowerCase().trim())
-  email: string;
+export type LoginDto = z.infer<typeof LoginSchema>;
 
-  @ApiProperty({ example: 'password123' })
-  @IsString()
-  @MaxLength(72)
-  password: string;
+export const ResetPasswordSchema = z.object({
+  token: z.string().min(1, 'Token é obrigatório'),
+  password: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
+});
 
-  @ApiProperty({
-    example: false,
-    required: false,
-    description: 'Se verdadeiro, a sessão será estendida.',
-  })
-  @IsBoolean()
-  @IsOptional()
-  rememberMe?: boolean;
-}
+export type ResetPasswordDto = z.infer<typeof ResetPasswordSchema>;
 
-export class ResetPasswordDto {
-  @ApiProperty({ description: 'Token de recuperação enviado por e-mail.' })
-  @IsString()
-  token: string;
+export const TwoFactorVerifySchema = z.object({
+  code: z.string().length(6, 'O código deve ter 6 dígitos'),
+  partialToken: z.string().min(1, 'Token parcial é obrigatório'),
+});
 
-  @ApiProperty({ minLength: 6, description: 'Nova senha do usuário.' })
-  @IsString()
-  @MinLength(6)
-  password: string;
-}
+export type TwoFactorVerifyDto = z.infer<typeof TwoFactorVerifySchema>;
 
-export class TwoFactorVerifyDto {
-  @ApiProperty({
-    example: '123456',
-    description: 'Código de 6 dígitos gerado pelo app de 2FA.',
-  })
-  @IsString()
-  @MinLength(6)
-  @MaxLength(6)
-  code: string;
+export const VerifyEmailSchema = z.object({
+  token: z.string().min(1, 'Token é obrigatório'),
+});
 
-  @ApiProperty({
-    description:
-      'Token parcial obtido após login bem-sucedido com 2FA ativado.',
-  })
-  @IsString()
-  partialToken: string;
-}
-
-export class VerifyEmailDto {
-  @ApiProperty({
-    example: 'a1b2c3d4e5f6g7h8i9j0',
-    description:
-      'Token de verificação enviado para o e-mail do usuário após o registro.',
-  })
-  @IsString()
-  token: string;
-}
+export type VerifyEmailDto = z.infer<typeof VerifyEmailSchema>;
